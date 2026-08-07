@@ -1,0 +1,60 @@
+{
+    "[javascript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "never",
+            "source.organizeImports": "never"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[vue]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": "never",
+            "source.organizeImports": "never"
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "css.format.spaceAroundSelectorSeparator": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.organizeImports": "never",
+        "source.organizeImports": "never",
+        "source.sort.json": "never",
+        "source.sortImports": "never"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "eslint.format.enable": true,
+    "html.format.indentHandlebars": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.templating": true,
+    "js/ts.format.insertSpaceAfterConstructor": true,
+    "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": true,
+    "js/ts.format.insertSpaceAfterTypeAssertion": true,
+    "js/ts.format.insertSpaceBeforeFunctionParenthesis": true,
+    "js/ts.format.placeOpenBraceOnNewLineForControlBlocks": true,
+    "js/ts.format.placeOpenBraceOnNewLineForFunctions": true,
+    "js/ts.tsserver.tracing.enabled": true,
+    "json.format.keepLines": true,
+    "less.format.spaceAroundSelectorSeparator": true,
+    "markdown.extension.tableFormatter.delimiterRowNoPadding": true,
+    "markdown.extension.tableFormatter.normalizeIndentation": true,
+    "scss.format.spaceAroundSelectorSeparator": true,
+    "vue.format.script.initialIndent": true,
+    "vue.format.style.initialIndent": true,
+    "vue.hover.rich": true
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Zendesk Pulse</title>
+        <meta name="description" content="Zendesk Pulse is a tool to extract and visualize data from Zendesk.">
+        <link rel="canonical" id="canonical-link" href="https://ralitsavoronevska.github.io/zd-pulse/">
+        <meta name="theme-color" content="#34d399">
+
+        <!-- Icons -->
+        <link rel="icon" type="image/png" href="assets/favicons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="assets/favicons/favicon.svg">
+        <link rel="shortcut icon" href="assets/favicons/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+
+        <!-- Preload LCP image so browser discovers it before JS parses -->
+        <link rel="preload" href="/src/assets/logo-light.png" as="image" type="image/png" fetchpriority="high">
+
+        <!-- Preload Google Font (async load) -->
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@500;600;700&display=swap"
+            as="style"
+            onload="
+                this.onload = null;
+                this.rel = 'stylesheet';
+            "
+        >
+
+        <!-- Noscript Fallback for Font -->
+        <noscript>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@500;600;700&display=swap">
+        </noscript>
+
+        <!-- Inline scripts: run before first paint -->
+        <script>
+            document.getElementById('canonical-link').href = location.origin + '/zd-pulse/';
+            if (localStorage.getItem('app-dark-mode') === 'true') document.documentElement.classList.add('app-dark');
+        </script>
+    </head>
+
+    <body>
+        <!-- Static shell: browser renders instantly from HTML; Vue replaces on mount -->
+        <div id="app">
+            <header
+                style="
+                    position: fixed;
+                    height: 4rem;
+                    z-index: 997;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    padding: 0 2rem;
+                    display: flex;
+                    align-items: center;
+                    background: var(--surface-card, #fff);
+                    box-shadow: 0.08rem 0.08rem 0.25rem rgba(0, 0, 0, 0.12);
+                    font-family: ui-sans-serif, system-ui, sans-serif;
+                "
+            >
+                <span style="font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; color: var(--text-color, #133d3a)">ZD Pulse</span>
+            </header>
+            <main style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: ui-sans-serif, system-ui, sans-serif; background: var(--surface-ground, #f8f9fa)">
+                <span style="color: var(--text-color-secondary, #888)">Loading...</span>
+            </main>
+        </div>
+        <script type="module" src="/src/main.js" defer></script>
+    </body>
+</html>

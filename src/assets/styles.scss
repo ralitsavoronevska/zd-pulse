@@ -1,0 +1,254 @@
+/* You can add global styles to this file, and also import other style files */
+@use 'primeicons/primeicons.css';
+@use '@/assets/layout/layout.scss';
+
+/* Ensure primeicons font shows text immediately while loading (prevents FOIT) */
+@font-face {
+    font-family: 'primeicons';
+    font-display: swap;
+    src:
+        url('/fonts/primeicons/primeicons.woff2') format('woff2'),
+        url('/fonts/primeicons/primeicons.woff') format('woff');
+}
+
+:root {
+    /* ── Theme-independent aliases (the source `--p-*` token already auto-switches with mode) ── */
+    --primary-color: var(--p-primary-color);
+    --primary-contrast-color: var(--p-primary-contrast-color);
+    --text-color: var(--p-text-color);
+    --text-color-secondary: var(--p-text-muted-color);
+    --surface-border: var(--p-content-border-color);
+    --surface-card: var(--p-content-background);
+    --surface-hover: var(--p-content-hover-background);
+    --surface-overlay: var(--p-overlay-popover-background);
+    --transition-duration: var(--p-transition-duration);
+    --maskbg: var(--p-mask-background);
+    --content-border-radius: var(--p-content-border-radius);
+    --layout-section-transition-duration: 0.2s;
+    --element-transition-duration: var(--p-transition-duration);
+    --focus-ring-width: var(--p-focus-ring-width);
+    --focus-ring-style: var(--p-focus-ring-style);
+    --focus-ring-color: var(--p-focus-ring-color);
+    --focus-ring-offset: var(--p-focus-ring-offset);
+    --focus-ring-shadow: var(--p-focus-ring-shadow);
+
+    /* ── Brand-fixed colors used as inputs to PrimeVue token overrides below ── */
+    --button-warn-dark-bg: #9c330c;
+    --button-warn-dark-hover-bg: #ca450c;
+    --button-danger-dark-bg: #ae1919;
+    --button-danger-dark-hover-bg: #c71f1f;
+
+    /* ── Page-level z-index stack ─────────────────────────────────────────────────
+       Documents the order of full-page overlays so future overlays land in the
+       right slot. PrimeVue's modals/popovers/toasts use z-index 1000+ internally,
+       so the topbar sits BELOW them on purpose — modals should render over the
+       topbar. The preloader covers everything (it owns the screen during initial
+       app boot, before any user-spawnable overlay can exist). DataTable sticky
+       layers (1-4 in TableDoc.vue) live in their own stacking context and don't
+       compete with these.
+       ────────────────────────────────────────────────────────────────────────── */
+    --z-topbar: 997;
+    --z-preloader: 999999;
+
+    /* ── PrimeVue Info button — brand-fixed colors (apply in both light and dark) ──
+        `!important` is kept here because PrimeVue's theme CSS is injected at runtime
+        (by main.js's `app.use(PrimeVue, ...)`) — it lands in the DOM AFTER this
+        bundled stylesheet, so at equal specificity it'd win by load order. The
+        `!important` on these CSS-variable definitions guarantees the brand colors
+        stick across both modes regardless of cascade order. */
+    --p-button-info-color: #ffffff !important;
+    --p-button-info-hover-color: #ffffff !important;
+    --p-button-info-active-color: #ffffff !important;
+    --p-button-info-background: #0e5c81 !important;
+    --p-button-info-hover-background: #0e6c9a !important;
+    --p-button-info-active-background: #0e6c9a !important;
+    --p-button-info-border-color: #0e5c81 !important;
+    --p-button-info-hover-border-color: #0e6c9a !important;
+    --p-button-info-active-border-color: #0e6c9a !important;
+}
+
+/* ── Theme-aware CSS custom properties ─────────────────────────────────────
+   Define light defaults here; dark overrides in html.app-dark below.
+   All component rules reference these vars — no duplicated light/dark blocks.
+   ────────────────────────────────────────────────────────────────────────── */
+html {
+    &:not(.app-dark) {
+        /* Surface / code colors (light theme) */
+        --surface-ground: var(--p-surface-100);
+        --code-background: var(--p-surface-900);
+        --code-color: var(--p-surface-200);
+
+        /* ── PrimeVue token redefinitions (light mode only) ───────────────────────────
+            PrimeVue's component CSS reads tokens like `var(--p-button-primary-background)`
+            directly. By redefining those tokens here, PrimeVue's own component rules
+            pick up our intended colors — no `!important` overrides on `.p-button` etc.
+
+            Selector specificity: `html:not(.app-dark)` is (0,1,1), one notch above
+            PrimeVue's `:root` (0,1,0) light-mode definitions, so we win in light mode.
+            In dark mode the selector doesn't match, so PrimeVue's `.app-dark` token
+            rules flow through unchanged — we don't have to know what those values are.
+            ────────────────────────────────────────────────────────────────────────── */
+
+        /* Primary (filled) button — Sign In, datatable filter Apply, etc. */
+        --p-button-primary-background: var(--p-primary-800);
+        --p-button-primary-border-color: var(--p-primary-800);
+        --p-button-primary-hover-background: var(--p-primary-700);
+        --p-button-primary-hover-border-color: var(--p-primary-700);
+
+        /* Warn button (severity="warn") — uses dark-palette colors in light mode */
+        --p-button-warn-background: var(--button-warn-dark-bg);
+        --p-button-warn-border-color: var(--button-warn-dark-bg);
+        --p-button-warn-hover-background: var(--button-warn-dark-hover-bg);
+        --p-button-warn-hover-border-color: var(--button-warn-dark-hover-bg);
+
+        /* Danger button (severity="danger") */
+        --p-button-danger-background: var(--button-danger-dark-bg);
+        --p-button-danger-border-color: var(--button-danger-dark-bg);
+        --p-button-danger-hover-background: var(--button-danger-dark-hover-bg);
+        --p-button-danger-hover-border-color: var(--button-danger-dark-hover-bg);
+
+        /* Outlined button — quick-date filters, multiselect chips, etc. */
+        --p-button-outlined-primary-color: var(--p-primary-800);
+        --p-button-outlined-primary-hover-color: var(--p-primary-950);
+        --p-button-outlined-primary-border-color: var(--p-primary-800);
+        --p-button-outlined-primary-hover-background: var(--p-primary-50);
+        --p-button-outlined-primary-hover-border-color: var(--p-primary-950);
+
+        /* App overrides that reference PrimeVue tokens — these cascade into 
+            components but also serve as a single source of truth for non-PrimeVue elements 
+            (e.g. the topbar's "Sign In" button is a PrimeVue Button, but the "Sign In" button 
+            in the preloader isn't, so both read from these CSS variables to stay in sync) */
+        --app-shadow-color: var(--p-primary-800);
+        --app-img-filter-stats: invert(37%) sepia(20%) saturate(2572%) hue-rotate(121deg) brightness(87%) contrast(97%);
+        --app-img-filter-action: invert(23%) sepia(6%) saturate(3120%) hue-rotate(176deg) brightness(86%) contrast(85%);
+        --app-dt-info-color: var(--p-tag-primary-color);
+        --app-text-primary: var(--p-primary-800);
+        --app-btn-outlined-border: var(--p-primary-800);
+        --app-btn-primary-bg: var(--p-primary-800);
+        --app-btn-primary-border: var(--p-primary-800);
+        --app-btn-primary-hover-bg: var(--p-primary-700);
+        --app-btn-primary-hover-border: var(--p-primary-700);
+    }
+
+    &.app-dark {
+        /* Surface / code colors (dark theme) */
+        --surface-ground: var(--p-surface-950);
+        --code-background: var(--p-surface-800);
+        --code-color: var(--p-surface-100);
+
+        /* Primary (filled) button — Sign In, datatable filter Apply, etc. */
+        --p-button-primary-color: var(--text-color);
+        --p-button-primary-background: var(--p-primary-800);
+        --p-button-primary-border-color: var(--p-primary-800);
+        --p-button-primary-hover-color: var(--text-color);
+        --p-button-primary-hover-background: var(--p-primary-700);
+        --p-button-primary-hover-border-color: var(--p-primary-700);
+
+        /* Danger button (severity="danger") */
+        --p-button-danger-color: var(--text-color);
+        --p-button-danger-background: var(--button-danger-dark-bg);
+        --p-button-danger-border-color: var(--button-danger-dark-bg);
+        --p-button-danger-hover-color: var(--text-color);
+        --p-button-danger-hover-background: var(--button-danger-dark-hover-bg);
+        --p-button-danger-hover-border-color: var(--button-danger-dark-hover-bg);
+
+        /* Outlined button — quick-date filters, multiselect chips, etc. */
+        --p-button-outlined-primary-hover-color: var(--text-color);
+        --p-button-outlined-primary-hover-background: transparent;
+        --p-button-outlined-primary-hover-border-color: var(--text-color);
+
+        /* App overrides that reference PrimeVue tokens — these cascade into 
+            components but also serve as a single source of truth for non-PrimeVue elements 
+            (e.g. the topbar's "Sign In" button is a PrimeVue Button, but the "Sign In" button 
+            in the preloader isn't, so both read from these CSS variables to stay in sync) */
+        --app-shadow-color: var(--primary-color);
+        --app-img-filter-stats: invert(100%) sepia(100%) saturate(0%) hue-rotate(287deg) brightness(108%) contrast(101%);
+        --app-img-filter-action: invert(100%) sepia(100%) saturate(0%) hue-rotate(287deg) brightness(108%) contrast(101%);
+        --app-dt-info-color: var(--text-color);
+        --app-text-primary: var(--primary-color);
+        --app-btn-outlined-border: var(--p-button-outlined-primary-border-color);
+        --app-btn-primary-bg: var(--p-primary-800);
+        --app-btn-primary-border: var(--p-primary-800);
+        --app-btn-primary-hover-bg: var(--p-primary-700);
+        --app-btn-primary-hover-border: var(--p-primary-700);
+    }
+}
+
+/* ── Surface shadows ──────────────────────────────────────────────────────── */
+.layout-topbar,
+.stats-widget-cards,
+.data-table,
+.dt-info-card,
+.vip-table {
+    box-shadow: 0.0875rem 0.0875rem 0.25rem var(--app-shadow-color);
+}
+
+/* ── Icon image filters ───────────────────────────────────────────────────── */
+#mode-toggle-button img,
+#user-profile-button img {
+    filter: var(--app-img-filter-action);
+}
+
+.stats-icon-box {
+    background: var(--p-button-outlined-primary-active-background);
+    img {
+        filter: var(--app-img-filter-stats);
+    }
+}
+
+/* ── Info strip ───────────────────────────────────────────────────────────── */
+.dt-info-p {
+    background: var(--p-button-outlined-primary-active-background);
+    color: var(--app-dt-info-color);
+}
+
+/* ── Active quick date filter ─────────────────────────────────────────────────
+   Selector specificity (0,3,0) beats PrimeVue's `.p-button.p-button-outlined`
+   (0,2,0), so the filled-primary appearance wins without !important. */
+.p-button {
+    &.p-component {
+        &.p-button-outlined {
+            &:hover {
+                background: var(--p-button-outlined-primary-hover-background);
+                border-color: var(--p-button-outlined-primary-hover-border-color);
+                color: var(--p-button-outlined-primary-hover-color);
+            }
+            &.dt-period-filters {
+                background: var(--p-button-outlined-primary-active-background);
+                &:hover {
+                    background: var(--p-button-outlined-primary-hover-background);
+                    border-color: var(--p-button-outlined-primary-hover-border-color);
+                    color: var(--p-button-outlined-primary-hover-color);
+                }
+            }
+            &.dt-period-active {
+                background: var(--app-btn-primary-bg);
+                border-color: var(--app-btn-primary-border);
+                color: #fff;
+                &:hover {
+                    background: var(--app-btn-primary-hover-bg);
+                    border-color: var(--app-btn-primary-hover-border);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+/* ── Text primary ─────────────────────────────────────────────────────────── */
+.text-primary {
+    color: var(--app-text-primary);
+}
+
+.p-multiselect-display-chip {
+    .p-multiselect-label {
+        flex-direction: column;
+    }
+}
+
+/* Hide multiselect's clear icon — the extra `.p-multiselect` ancestor lifts
+   the selector to specificity (0,2,0), beating PrimeVue's `.p-multiselect-clear-icon`
+   (0,1,0) without !important. */
+.p-multiselect .p-multiselect-clear-icon {
+    display: none;
+}

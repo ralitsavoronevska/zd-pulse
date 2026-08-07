@@ -1,0 +1,93 @@
+/* Utils */
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: var(--content-border-radius);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.p-toast {
+    &.p-toast-top-right,
+    &.p-toast-top-left,
+    &.p-toast-top-center {
+        top: 100px;
+    }
+}
+
+/* Top horizontal scrollbar — injected via JS by `useDataTableTopScrollbar`
+   as a sibling above PrimeVue's `.p-datatable-table-container` so the bar
+   sits above the column header instead of at the bottom of the table.
+   Mac visibility: `-webkit-appearance: none` plus explicit `::-webkit-scrollbar`
+   rules force Safari/Chrome to render a "classic" persistent scrollbar
+   instead of the auto-hiding overlay. The thumb uses `--p-primary-500`
+   (full-saturation brand color) for high contrast against the track. */
+.dt-top-scrollbar {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 10px;
+    background-color: var(--surface-ground);
+    border-radius: 5px;
+
+    > div {
+        height: 1px;
+    }
+
+    &::-webkit-scrollbar {
+        height: 10px;
+        -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar-track {
+        border-radius: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--p-primary-500);
+        border-radius: 5px;
+        min-width: 40px;
+        background-clip: padding-box;
+
+        &:hover {
+            background-color: var(--p-primary-600);
+        }
+        &:active {
+            background-color: var(--p-primary-700);
+        }
+    }
+
+    /* Firefox — `auto` (full size) is more visible than `thin`. */
+    scrollbar-width: auto;
+    scrollbar-color: var(--p-primary-500);
+}
+
+.app-dark .dt-top-scrollbar {
+    background-color: var(--p-surface-800);
+
+    &::-webkit-scrollbar-track {
+        background: var(--p-surface-800);
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--p-primary-400);
+
+        &:hover {
+            background-color: var(--p-primary-300);
+        }
+        &:active {
+            background-color: var(--p-primary-200);
+        }
+    }
+
+    scrollbar-color: var(--p-primary-400);
+}
+
+/* Hide the native bottom scrollbar on every PrimeVue DataTable scroll
+   container — horizontal scrolling still works via the top scrollbar
+   (`.dt-top-scrollbar`), mouse wheel, and keyboard. */
+.p-datatable-table-container {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

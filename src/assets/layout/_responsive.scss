@@ -1,0 +1,34 @@
+/* DataTable responsive: stack header on small screens.
+   Selectors at (0,3,0) and (0,1,0) — unlayered rules already win against Tailwind
+   utilities (which live in `@layer utilities`) and tie + win-by-load-order
+   against PrimeVue's same-class rules, so no !important is needed. */
+@media (max-width: 640px) {
+    .p-datatable-header .flex.justify-between {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .p-datatable-header .flex.justify-between > * {
+        width: 100%;
+    }
+
+    .p-datatable-header button.p-button {
+        justify-content: center;
+    }
+
+    .p-datatable-header {
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .layout-topbar {
+        padding: 0 2rem;
+        .layout-topbar-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 1rem;
+        }
+    }
+}

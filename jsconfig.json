@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./src/*"],
+            "@rootfirebase/*": ["./firebase/*"]
+        }
+    },
+    "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,70 @@
+{
+    "name": "zd-pulse",
+    "version": "1.0.0",
+    "description": "ZD Pulse - Modern PrimeVue UI for Zendesk",
+    "type": "module",
+    "author": "Ralitsa Voronevska",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ralitsavoronevska/zd-pulse.git"
+    },
+    "keywords": [
+        "Vue.js 3 Composition API",
+        "Tailwind CSS v4",
+        "JavaScript",
+        "Pinia",
+        "Vite",
+        "Vitest",
+        "Responsiveness",
+        "Transitions",
+        "Animations",
+        "Flex Layout",
+        "Grid Layout"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "clean-build": "rm -rf dist && vite build",
+        "predeploy": "npm run build",
+        "preview": "vite preview",
+        "lint": "eslint --fix \"**/*.{vue,js,jsx,cjs,mjs}\"",
+        "refresh-mock-dates": "node scripts/refresh-mock-dates.mjs",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "test:ui": "vitest --ui",
+        "test:coverage": "vitest --coverage",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "dependencies": {
+        "@primeuix/themes": "^2.0.0",
+        "axios": "^1.13.5",
+        "chart.js": "3.3.2",
+        "firebase": "^12.13.0",
+        "pinia": "^3.0.4",
+        "primeicons": "^7.0.0",
+        "primevue": "^4.5.4",
+        "tailwindcss-primeui": "^0.6.0",
+        "vue": "^3.4.34",
+        "vue-router": "^4.6.4"
+    },
+    "devDependencies": {
+        "@primevue/auto-import-resolver": "^4.5.4",
+        "@rushstack/eslint-patch": "^1.8.0",
+        "@tailwindcss/vite": "^4.2.1",
+        "@vitejs/plugin-vue": "^6.0.4",
+        "@vitest/coverage-v8": "^4.1.5",
+        "@vitest/ui": "^4.1.5",
+        "@vue/eslint-config-prettier": "^9.0.0",
+        "eslint": "^10.0.1",
+        "eslint-plugin-vue": "^10.8.0",
+        "happy-dom": "^20.9.0",
+        "prettier": "3.8.3",
+        "sass": "^1.55.0",
+        "tailwindcss": "^4.1.17",
+        "unplugin-vue-components": "^31.0.0",
+        "vite": "^6.0.0",
+        "vitest": "^4.1.5"
+    }
+}
