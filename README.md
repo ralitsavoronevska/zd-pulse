@@ -94,7 +94,7 @@ This project is company property, and while I built the frontend, the Django + A
 I wasn't involved in - so I can't showcase that part publicly. For this demo, the app runs in
 Firebase mode instead, which handles authentication independently of the backend.
 
-I'm on Firebase's free 30-day plan, started on July 21st and ending on August 20th.
+I'm on Firebase's free 30-day plan, started on September 8th and ending on October 8th.
 If login isn't working when you try, it's most likely because that free trial has expired.
 
 <br>
