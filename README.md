@@ -266,7 +266,7 @@ The build is configured for the GitHub Pages sub-path (`base: '/zd-pulse/'` in `
 # 🌟 Inspiration & Credits:
 
 🪄 [Claude AI](https://claude.ai/)  
-:octocat: [GitHub Coplit](https://github.com/features/copilot/)
+:octocat: [GitHub Copilot](https://github.com/features/copilot/)
 
 ---
 
