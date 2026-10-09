@@ -1,11 +1,10 @@
 <script setup>
 import Logo from '@/components/Logo.vue';
 import { useLayout } from '@/layout/composables/layout';
-import { useAuthStore } from '@/stores/auth';
 import Button from 'primevue/button';
 
 const { toggleDarkMode, isDarkTheme } = useLayout();
-const authStore = useAuthStore();
+const authStore = await import('@/stores/auth');
 
 async function handleLogout() {
     // Await so the POST /api/logout/ call isn't aborted mid-flight by the
@@ -16,7 +15,7 @@ async function handleLogout() {
     // and every cached piece of app state is thrown out. A pure SPA navigation
     // would let the next user (on a shared machine) briefly see the previous
     // user's tickets before the core-aggregation fetch lands.
-    window.location.href = `${import.meta.env.BASE_URL}login`;
+    window.location.href = `${import.meta.env.BASE_URL}`;
 }
 </script>
 

@@ -1,4 +1,3 @@
-import { useAuthStore } from '@/stores/auth';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -34,8 +33,8 @@ const router = createRouter({
     scrollBehavior: () => ({ top: 0, behavior: 'smooth' })
 });
 
-router.beforeEach((to) => {
-    const authStore = useAuthStore();
+router.beforeEach(async (to) => {
+    const authStore = await import('@/stores/auth');
 
     if (to.meta.requiresAuth && !authStore.isAuthenticated) {
         return { name: 'login', query: to.path !== '/' ? { redirect: to.fullPath } : {} };

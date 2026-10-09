@@ -1,9 +1,8 @@
 <script setup>
 import { defineAsyncComponent } from 'vue';
 import StatsWidget from '@/components/StatsWidget.vue';
-import { useAuthStore } from '@/stores/auth';
 
-const authStore = useAuthStore();
+const authStore = await import('@/stores/auth');
 
 const TableDoc = defineAsyncComponent(() => import('./uikit/TableDoc.vue'));
 const VipTableDoc = defineAsyncComponent(() => import('./uikit/VipTableDoc.vue'));

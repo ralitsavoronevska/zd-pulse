@@ -2,7 +2,6 @@ import { useCsvExport } from '@/composables/useCsvExport';
 import { useFacetedFilterOptions } from '@/composables/useFacetedFilterOptions';
 import { FILTER_DEBOUNCE_MS, PAGE_SIZE_DEFAULT } from '@/composables/useTicketFilters';
 import { buildExportParams, buildTicketListParams, exportTicketsCsv } from '@/services/ticketApi';
-import { useAuthStore } from '@/stores/auth';
 import { useTableStore } from '@/stores/tableStore';
 import { useTicketDataStore } from '@/stores/ticketData';
 import { formatDate } from '@/utils/dateUtils';
@@ -23,10 +22,10 @@ const USE_FIREBASE = import.meta.env.VITE_USE_FIREBASE === 'true';
  * @param {Object} filterState — return value of useTicketFilters()
  * @param {import('vue').Ref} dataTableRef — template ref for the DataTable (mock CSV export)
  */
-export function useTicketTableData(filterState, dataTableRef) {
+export async function useTicketTableData(filterState, dataTableRef) {
     const { filters, lazyParams, extractFilterParams, resetFilters, applyQuickDateFilter } = filterState;
 
-    const authStore = useAuthStore();
+    const authStore = await import('@/stores/auth');
     const tableStore = useTableStore();
     const ticketDataStore = useTicketDataStore();
     const { isLoading } = storeToRefs(ticketDataStore);
