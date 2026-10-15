@@ -84,15 +84,15 @@ async function handleLogin() {
                                 <label for="emailOrUsername1" class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2">
                                     {{ USE_FIREBASE ? 'Email' : 'Username' }}
                                 </label>
-                                <InputText 
-                                    id="emailOrUsername1" 
-                                    :type="USE_FIREBASE ? 'email' : 'text'" 
-                                    :placeholder="USE_FIREBASE ? 'Email address' : 'Username'" 
-                                    class="w-full md:w-120" 
-                                    v-model="emailOrUsername" 
+                                <InputText
+                                    id="emailOrUsername1"
+                                    :type="USE_FIREBASE ? 'email' : 'text'"
+                                    :placeholder="USE_FIREBASE ? 'Email address' : 'Username'"
+                                    class="w-full md:w-120"
+                                    v-model="emailOrUsername"
                                     :autocomplete="USE_FIREBASE ? 'email' : 'username'"
-                                    required 
-                                    autofocus 
+                                    required
+                                    autofocus
                                 />
                             </div>
 
