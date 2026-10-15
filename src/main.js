@@ -7,6 +7,7 @@ import router from './router';
 import Aura from '@primeuix/themes/aura';
 import PrimeVue from 'primevue/config';
 
+import { useAuthStore } from '@/stores/auth';
 import { logger } from '@/utils/logger';
 
 import '@/assets/tailwind.css';
@@ -40,7 +41,7 @@ app.use(PrimeVue, {
     }
 });
 
-const authStore = await import('@/stores/auth');
-await authStore.default.initializeAuth();
+const authStore = useAuthStore();
+await authStore.initializeAuth();
 
 app.mount('#app');

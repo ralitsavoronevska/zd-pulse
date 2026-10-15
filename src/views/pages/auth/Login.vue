@@ -1,6 +1,7 @@
 <script setup>
 import FloatingConfigurator from '@/components/FloatingConfigurator.vue';
 import Logo from '@/components/Logo.vue';
+import { useAuthStore } from '@/stores/auth';
 import { safeRedirectPath } from '@/utils/safeRedirect';
 import { nextTick, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -11,7 +12,7 @@ import Password from 'primevue/password';
 
 const USE_FIREBASE = import.meta.env.VITE_USE_FIREBASE === 'true';
 
-const authStore = await import('@/stores/auth');
+const authStore = useAuthStore();
 const router = useRouter();
 const route = useRoute();
 
