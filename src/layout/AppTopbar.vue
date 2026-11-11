@@ -16,7 +16,7 @@ async function handleLogout() {
     // and every cached piece of app state is thrown out. A pure SPA navigation
     // would let the next user (on a shared machine) briefly see the previous
     // user's tickets before the core-aggregation fetch lands.
-    window.location.href = `${import.meta.env.BASE_URL}login`;
+    window.location.href = `${import.meta.env.BASE_URL}`;
 }
 </script>
 
